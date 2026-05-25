@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
+import { url } from '../utils/url';
 
 interface Props {
   entry: CollectionEntry<'projects'>;
@@ -17,7 +18,7 @@ const fmt = (d: Date) =>
 
     <nav aria-label="Breadcrumb" class="mb-10">
       <a
-        href="/projects"
+        href={url('/projects')}
         class="font-mono text-xs text-subtle hover:text-accent transition-colors"
       >
         ← Projects

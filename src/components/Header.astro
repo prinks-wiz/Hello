@@ -1,12 +1,13 @@
 ---
 import CoordinateDisplay from './CoordinateDisplay.astro';
 import ThemeToggle from './ThemeToggle.astro';
+import { url } from '../utils/url';
 
 const navLinks = [
-  { href: '/work',     label: 'Work'     },
-  { href: '/projects', label: 'Projects' },
-  { href: '/writing',  label: 'Writing'  },
-  { href: '/about',    label: 'About'    },
+  { href: url('/work'),     label: 'Work'     },
+  { href: url('/projects'), label: 'Projects' },
+  { href: url('/writing'),  label: 'Writing'  },
+  { href: url('/about'),    label: 'About'    },
 ];
 
 const path = Astro.url.pathname;
@@ -20,7 +21,7 @@ const path = Astro.url.pathname;
       <div class="flex items-center gap-8">
         <!-- Home / identity mark -->
         <a
-          href="/"
+          href={url('/')}
           class="font-mono text-sm font-medium text-content hover:text-accent transition-colors"
           aria-label="Home"
         >

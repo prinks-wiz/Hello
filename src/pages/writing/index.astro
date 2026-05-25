@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
 import { getCollection } from 'astro:content';
+import { url } from '../../utils/url';
 
 const posts = await getCollection('writing');
 const sorted = posts.sort(
@@ -26,7 +27,7 @@ const sorted = posts.sort(
           <article>
             <div class="flex items-start justify-between gap-4">
               <div class="flex-1 min-w-0">
-                <a href={`/writing/${post.slug}`} class="group block">
+                <a href={url(`/writing/${post.slug}`)} class="group block">
                   <h2 class="text-base font-medium text-content group-hover:text-accent transition-colors mb-2">
                     {post.data.title}
                   </h2>

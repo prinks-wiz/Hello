@@ -4,6 +4,7 @@ import SectionHeader from '../components/SectionHeader.astro';
 import OrbitDivider from '../components/OrbitDivider.astro';
 import MissionBlock from '../components/MissionBlock.astro';
 import { getCollection } from 'astro:content';
+import { url } from '../utils/url';
 
 const [allProjects, allWriting] = await Promise.all([
   getCollection('projects'),
@@ -110,10 +111,10 @@ const fmtDate = (d: Date) =>
 
       <!-- Quick nav links -->
       <div class="flex flex-wrap gap-x-6 gap-y-2 mt-10">
-        <a href="/work"     class="font-mono text-xs text-accent hover:underline">Work →</a>
-        <a href="/projects" class="font-mono text-xs text-accent hover:underline">Projects →</a>
-        <a href="/writing"  class="font-mono text-xs text-accent hover:underline">Writing →</a>
-        <a href="/about"    class="font-mono text-xs text-accent hover:underline">About →</a>
+        <a href={url('/work')}     class="font-mono text-xs text-accent hover:underline">Work →</a>
+        <a href={url('/projects')} class="font-mono text-xs text-accent hover:underline">Projects →</a>
+        <a href={url('/writing')}  class="font-mono text-xs text-accent hover:underline">Writing →</a>
+        <a href={url('/about')}    class="font-mono text-xs text-accent hover:underline">About →</a>
       </div>
     </section>
 
@@ -186,10 +187,10 @@ const fmtDate = (d: Date) =>
         </ul>
 
         <div class="pt-6 flex gap-6">
-          <a href="/projects" class="font-mono text-xs text-subtle hover:text-accent transition-colors">
+          <a href={url('/projects')} class="font-mono text-xs text-subtle hover:text-accent transition-colors">
             All projects →
           </a>
-          <a href="/writing" class="font-mono text-xs text-subtle hover:text-accent transition-colors">
+          <a href={url('/writing')} class="font-mono text-xs text-subtle hover:text-accent transition-colors">
             All writing →
           </a>
         </div>
