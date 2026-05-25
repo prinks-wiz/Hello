@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+---
+<BaseLayout
+  title="About — Portfolio"
+  description="Background, interests, and contact information."
+>
+  <div class="max-w-[720px] mx-auto px-6 py-16">
+
+    <SectionHeader number="04" title="ABOUT" />
+
+    <h1 class="text-2xl font-semibold text-content mb-12 tracking-tight">
+      About
+    </h1>
+
+    <!-- ── Background ──────────────────────────────────────────────────── -->
+    <section aria-labelledby="background-heading" class="mb-12">
+      <h2
+        id="background-heading"
+        class="font-mono text-xs text-subtle uppercase tracking-[0.15em] mb-5"
+      >
+        Background
+      </h2>
+      <div class="space-y-4 text-subtle leading-relaxed text-sm">
+        <p>
+          I'm Priyanka Vijaybaskar — an MCDS student at Carnegie Mellon
+          University working at the intersection of machine learning and
+          physical systems. My current research is in the CMU Spacecraft Lab,
+          where I'm building the computer vision pipeline for a NASA-class
+          CubeSat mission: training EfficientNet on Sentinel-2 multispectral
+          imagery, quantizing to INT8, and validating end-to-end inference on
+          a Jetson Orin NX under strict power constraints. Alongside that,
+          I'm building an open-source toolkit for deploying vision-language
+          models on edge hardware via ONNX and TensorRT.
+        </p>
+        <p>
+          What draws me to this area is the constraint. A cloud model can be
+          re-evaluated, patched, and scaled overnight. A model running on a
+          spacecraft in low Earth orbit, or on a legged robot mid-traverse,
+          cannot. That gap — between "it works in the lab" and "it works
+          reliably on hardware, at power, in the real world" — is where I
+          want to spend my career. I'm particularly interested in roles at
+          companies building autonomous systems where the physical environment
+          is the test: robotics, aerospace, edge AI infrastructure.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Contact ────────────────────────────────────────────────────── -->
+    <section
+      aria-labelledby="contact-heading"
+      class="mb-12 border-t border-edge pt-8"
+    >
+      <h2
+        id="contact-heading"
+        class="font-mono text-xs text-subtle uppercase tracking-[0.15em] mb-5"
+      >
+        Contact
+      </h2>
+      <ul class="space-y-2 list-none m-0 p-0">
+        <li>
+          <a
+            href="mailto:priyanka@example.com"
+            class="font-mono text-sm text-accent hover:underline"
+          >
+            priyanka@example.com
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://github.com/prinks-wiz"
+            class="font-mono text-sm text-accent hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            github.com/prinks-wiz
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://linkedin.com/in/priyankavijaybaskar"
+            class="font-mono text-sm text-accent hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            linkedin.com/in/priyankavijaybaskar
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ── CV / Résumé ────────────────────────────────────────────────── -->
+    <section
+      aria-labelledby="cv-heading"
+      class="border-t border-edge pt-8"
+    >
+      <h2
+        id="cv-heading"
+        class="font-mono text-xs text-subtle uppercase tracking-[0.15em] mb-5"
+      >
+        Résumé
+      </h2>
+      <a
+        href="/resume.pdf"
+        class="font-mono text-sm text-accent hover:underline"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Download PDF →
+      </a>
+      <p class="text-xs text-subtle mt-2 font-mono">
+        Place resume.pdf in /public/ to activate this link.
+      </p>
+    </section>
+
+  </div>
+</BaseLayout>

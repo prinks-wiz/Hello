@@ -1,0 +1,41 @@
+---
+// The button label shows the mode you'll switch TO (i.e. the action).
+// Initialization happens via the inline script in BaseLayout <head> to
+// prevent flash. This script only syncs the label and attaches the listener.
+---
+<button
+  id="theme-toggle"
+  aria-label="Toggle color scheme"
+  class="font-mono text-xs text-subtle hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-none"
+>
+  <!-- Filled in by script below; default matches the inline head script -->
+  <span id="theme-label">DARK</span>
+</button>
+
+<script>
+  const btn   = document.getElementById('theme-toggle') as HTMLButtonElement;
+  const label = document.getElementById('theme-label') as HTMLSpanElement;
+
+  function current(): 'dark' | 'light' {
+    const stored = localStorage.getItem('theme');
+    if (stored === 'dark' || stored === 'light') return stored;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+  }
+
+  function apply(theme: 'dark' | 'light') {
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    // Label shows the opposite — what clicking will switch you to
+    label.textContent = theme === 'dark' ? 'LIGHT' : 'DARK';
+  }
+
+  // Sync label with whatever the head script already set
+  apply(current());
+
+  btn.addEventListener('click', () => {
+    const next = current() === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('theme', next);
+    apply(next);
+  });
+</script>

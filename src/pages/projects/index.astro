@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const all = await getCollection('projects');
+
+// Newest first; featured projects bubble to the top within same date
+const sorted = all.sort((a, b) => {
+  if (a.data.featured !== b.data.featured)
+    return a.data.featured ? -1 : 1;
+  return b.data.date.valueOf() - a.data.date.valueOf();
+});
+---
+<BaseLayout
+  title="Projects — Portfolio"
+  description="ML, robotics, and systems engineering projects."
+>
+  <div class="max-w-[720px] mx-auto px-6 py-16">
+
+    <SectionHeader number="02" title="PROJECTS" />
+
+    <h1 class="text-2xl font-semibold text-content mb-12 tracking-tight">
+      Projects
+    </h1>
+
+    {sorted.map(project => (
+      <ProjectCard
+        title={project.data.title}
+        slug={project.slug}
+        summary={project.data.summary}
+        date={project.data.date}
+        techStack={project.data.techStack}
+        featured={project.data.featured}
+      />
+    ))}
+
+  </div>
+</BaseLayout>

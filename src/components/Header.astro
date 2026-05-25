@@ -1,0 +1,85 @@
+---
+import CoordinateDisplay from './CoordinateDisplay.astro';
+import ThemeToggle from './ThemeToggle.astro';
+
+const navLinks = [
+  { href: '/work',     label: 'Work'     },
+  { href: '/projects', label: 'Projects' },
+  { href: '/writing',  label: 'Writing'  },
+  { href: '/about',    label: 'About'    },
+];
+
+const path = Astro.url.pathname;
+---
+<header class="border-b border-edge">
+  <div class="max-w-[720px] mx-auto px-6 py-4">
+
+    <!-- Single-row on md+; stacked on mobile -->
+    <div class="flex items-center justify-between gap-4">
+
+      <div class="flex items-center gap-8">
+        <!-- Home / identity mark -->
+        <a
+          href="/"
+          class="font-mono text-sm font-medium text-content hover:text-accent transition-colors"
+          aria-label="Home"
+        >
+          YOUR.NAME
+        </a>
+
+        <!-- Primary nav — hidden on small screens, shown on sm+ -->
+        <nav aria-label="Main navigation" class="hidden sm:block">
+          <ul class="flex items-center gap-5 list-none m-0 p-0">
+            {navLinks.map(link => (
+              <li>
+                <a
+                  href={link.href}
+                  class:list={[
+                    'text-sm transition-colors',
+                    path.startsWith(link.href)
+                      ? 'text-accent font-medium'
+                      : 'text-subtle hover:text-content',
+                  ]}
+                  aria-current={path.startsWith(link.href) ? 'page' : undefined}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Right cluster -->
+      <div class="flex items-center gap-4">
+        <div class="hidden md:block">
+          <CoordinateDisplay />
+        </div>
+        <ThemeToggle />
+      </div>
+    </div>
+
+    <!-- Mobile nav — shown only on small screens -->
+    <nav aria-label="Mobile navigation" class="sm:hidden pt-3 border-t border-edge mt-3">
+      <ul class="flex items-center gap-4 list-none m-0 p-0">
+        {navLinks.map(link => (
+          <li>
+            <a
+              href={link.href}
+              class:list={[
+                'text-sm transition-colors',
+                path.startsWith(link.href)
+                  ? 'text-accent font-medium'
+                  : 'text-subtle hover:text-content',
+              ]}
+              aria-current={path.startsWith(link.href) ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+  </div>
+</header>

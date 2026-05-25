@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import WorkEntry from '../components/WorkEntry.astro';
+import { getCollection } from 'astro:content';
+
+const entries = await getCollection('work');
+
+// Most recent role first
+const sorted = entries.sort(
+  (a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf()
+);
+---
+<BaseLayout
+  title="Work — Portfolio"
+  description="Research and professional experience in ML and robotics."
+>
+  <div class="max-w-[720px] mx-auto px-6 py-16">
+
+    <SectionHeader number="01" title="WORK" />
+
+    <h1 class="text-2xl font-semibold text-content mb-12 tracking-tight">
+      Experience
+    </h1>
+
+    {sorted.map(entry => (
+      <WorkEntry
+        org={entry.data.org}
+        role={entry.data.role}
+        startDate={entry.data.startDate}
+        endDate={entry.data.endDate}
+        description={entry.data.description}
+        techStack={entry.data.techStack}
+        location={entry.data.location}
+      />
+    ))}
+
+  </div>
+</BaseLayout>

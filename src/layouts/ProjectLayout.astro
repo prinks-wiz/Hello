@@ -1,0 +1,94 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  entry: CollectionEntry<'projects'>;
+}
+
+const { entry } = Astro.props;
+const { title, summary, date, techStack, links } = entry.data;
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+---
+<BaseLayout title={`${title} — Projects`} description={summary}>
+  <div class="max-w-[720px] mx-auto px-6 py-16">
+
+    <nav aria-label="Breadcrumb" class="mb-10">
+      <a
+        href="/projects"
+        class="font-mono text-xs text-subtle hover:text-accent transition-colors"
+      >
+        ← Projects
+      </a>
+    </nav>
+
+    <header class="mb-12 border-b border-edge pb-8">
+      <time
+        class="font-mono text-xs text-subtle block mb-3"
+        datetime={date.toISOString()}
+      >
+        {fmt(date)}
+      </time>
+
+      <h1 class="text-2xl font-semibold text-content mb-4 tracking-tight">
+        {title}
+      </h1>
+
+      <p class="text-subtle leading-relaxed mb-6">{summary}</p>
+
+      <!-- Tech stack tags -->
+      <ul class="flex flex-wrap gap-2 list-none m-0 p-0 mb-6" aria-label="Tech stack">
+        {techStack.map(tech => (
+          <li>
+            <span class="font-mono text-xs text-subtle border border-edge px-2 py-0.5">
+              {tech}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      <!-- External links -->
+      {links && (
+        <div class="flex flex-wrap gap-5">
+          {links.github && (
+            <a
+              href={links.github}
+              class="font-mono text-xs text-accent hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub →
+            </a>
+          )}
+          {links.demo && (
+            <a
+              href={links.demo}
+              class="font-mono text-xs text-accent hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Demo →
+            </a>
+          )}
+          {links.blog && (
+            <a
+              href={links.blog}
+              class="font-mono text-xs text-accent hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Write-up →
+            </a>
+          )}
+        </div>
+      )}
+    </header>
+
+    <article class="prose-content">
+      <slot />
+    </article>
+
+  </div>
+</BaseLayout>

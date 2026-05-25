@@ -1,0 +1,42 @@
+---
+interface Props {
+  title:     string;
+  slug:      string;
+  summary:   string;
+  date:      Date;
+  techStack: string[];
+  featured?: boolean;
+}
+const { title, slug, summary, date, techStack, featured = false } = Astro.props;
+const formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+---
+<article class="border-b border-edge py-8 group">
+  <div class="flex items-start justify-between gap-4">
+    <div class="flex-1 min-w-0">
+      <a href={`/projects/${slug}`} class="block" tabindex="0">
+        <h3 class="text-base font-semibold text-content group-hover:text-accent transition-colors mb-2 flex items-center gap-2">
+          {title}
+          {featured && (
+            <span class="font-mono text-xs text-accent" aria-label="Featured">★</span>
+          )}
+        </h3>
+        <p class="text-sm text-subtle leading-relaxed mb-4">{summary}</p>
+      </a>
+      <ul class="flex flex-wrap gap-2 list-none m-0 p-0" aria-label="Tech stack">
+        {techStack.map(tech => (
+          <li>
+            <span class="font-mono text-xs text-subtle border border-edge px-2 py-0.5">
+              {tech}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <time
+      class="font-mono text-xs text-subtle shrink-0 mt-0.5"
+      datetime={date.toISOString()}
+    >
+      {formattedDate}
+    </time>
+  </div>
+</article>

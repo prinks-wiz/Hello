@@ -1,0 +1,32 @@
+---
+import OrbitalSimulation from './OrbitalSimulation.astro';
+
+const year = new Date().getFullYear();
+---
+<footer class="border-t border-edge mt-24">
+
+  <!-- Orbital simulation — centered, clearly labelled physics -->
+  <OrbitalSimulation />
+
+  <div class="max-w-[720px] mx-auto px-6 py-8 flex items-center justify-between">
+    <span class="font-mono text-xs text-subtle">© {year}</span>
+    <div class="flex items-center gap-5">
+      <a
+        href="https://github.com/prinks-wiz"
+        class="font-mono text-xs text-subtle hover:text-accent transition-colors"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GitHub
+      </a>
+      <a
+        href="https://linkedin.com/in/priyankavijaybaskar"
+        class="font-mono text-xs text-subtle hover:text-accent transition-colors"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        LinkedIn
+      </a>
+    </div>
+  </div>
+</footer>
