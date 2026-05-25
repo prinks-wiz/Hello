@@ -1,23 +1,28 @@
 ---
-title: "CubeSat CV Pipeline"
-summary: "End-to-end computer vision pipeline for a NASA-class CubeSat mission, fine-tuned on Sentinel-2 imagery with quantization for the Jetson Orin."
-date: 2025-10-01
-techStack: ["PyTorch", "EfficientNet", "TensorRT", "INT8 Quantization", "NVIDIA Jetson"]
-featured: true
+title: "Cloud-Native Twitter Recommendation Engine"
+slug: "aws-twitter-recommender"
+summary: "Kubernetes microservice architecture serving a Twitter recommendation engine at 8,700+ RPS with 93.5% correctness, achieving 41.7x throughput improvement through systematic bottleneck elimination."
+date: 2026-01-01
+techStack: ["Kubernetes", "AWS", "kOps", "MySQL", "InnoDB", "GitHub Actions", "Helm", "ARM Graviton"]
+featured: false
 ---
 
 ## Overview
 
-*Real content is TBD — this is a placeholder.*
+The premise of this project was simple and adversarial: build a recommendation service that can sustain 8,700 requests per second at 93.5% correctness, on a heterogeneous cluster of ARM-based AWS Graviton instances, at the lowest possible cost. The starting point was a functional but naive service that handled maybe 200 RPS. The 41.7x improvement between those two numbers was, as these things usually are, not one insight but a sequence of bottleneck removals — each one revealing the next.
 
-On-orbit inference under strict power constraints is a fundamentally different engineering problem from cloud-based Earth observation. A CubeSat in low Earth orbit has seconds per pass to collect useful data, a watt-level power budget, and no opportunity for a hotfix if the inference pipeline locks up. This project builds the CV stack for a NASA-class 6U CubeSat mission at CMU's Spacecraft Lab, targeting land-cover and change-detection classification on Sentinel-2 multispectral imagery.
+## Architecture
 
-## Model and Quantization
+The service runs on a Kubernetes cluster provisioned with kOps on AWS, behind a Network Load Balancer. The recommendation engine itself is a read-heavy service querying a MySQL backend; the dominant cost at low throughput was database access, and that remained true all the way to 8,700 RPS, just at different layers.
 
-*Placeholder — describe the fine-tuning dataset, EfficientNet variant, and INT8 calibration approach here.*
+## Systematic Optimization
 
-EfficientNet-B0 was chosen for its favourable accuracy-to-FLOPs ratio on the target imagery resolution. The model is fine-tuned on a curated subset of Sentinel-2 scenes, exported to ONNX, and quantized to INT8 using TensorRT's post-training quantization with a representative calibration set. Inference runs on the Jetson Orin NX at under 8W sustained, well within the mission power budget.
+Schema denormalization came first. The original schema had normalized relationships that required multi-table joins on every recommendation query. Denormalizing the hottest read paths gave a 3.5x throughput improvement immediately — not through any clever engineering, but by simply reducing work.
 
-## Current Status
+InnoDB buffer pool tuning followed. Profiling showed cache hit rates below 60% under load. Sizing the buffer pool correctly for the working set and monitoring with `SHOW ENGINE INNODB STATUS` pushed the cache hit ratio to 98.4% — queries that had been going to disk were now in memory, and latency dropped proportionally.
 
-Active development. Ground-truth benchmarks against full-resolution Sentinel-2 validation sets are in progress. On-device latency and power profiling results will be posted here once the hardware integration is complete.
+Prepared statement caching removed query parsing overhead from the hot path. Auth token TTL, set to 45 seconds, reduced authentication overhead by 95% — a surprisingly large fraction of total request cost had been in token validation on every call.
+
+## CI/CD and Operations
+
+The deployment pipeline uses GitHub Actions with Helm charts for all service manifests. Deployments are immutable: every release is SHA-tagged, and the pipeline supports conditional database initialization so cluster recreation (possible in under 8 minutes) does not require manual state management. NLB-based traffic routing handles the rest. The infrastructure is designed to be reproducible from scratch, which matters more than it might seem when the cluster is in someone's AWS account on a course deadline.

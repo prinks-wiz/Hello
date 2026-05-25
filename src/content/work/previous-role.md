@@ -1,9 +1,15 @@
 ---
-org: "Previous Company"
-role: "ML Engineer"
-startDate: 2021-07-01
-endDate: 2023-05-31
-description: "Built training infrastructure and model optimization pipelines for large-scale computer vision models deployed on edge devices. Led quantization and pruning work that reduced inference latency by 40% without accuracy regression."
-techStack: ["Python", "PyTorch", "TensorRT", "ONNX", "Docker", "Kubernetes"]
-location: "Remote"
+org: "Sri Sivasubramaniya Nadar College of Engineering"
+role: "Undergraduate Researcher — Deepfake Detection"
+startDate: 2023-09-01
+endDate: 2024-04-30
+location: "Chennai, India"
+description: "Developed a deepfake detection pipeline using 2D ResNet-18, Conformer, and transformer decoders to identify audio-visual mismatches. Research selected for IEEE CADEIS 2024 from 750 submissions; received Best Paper Award (Runner-Up)."
+techStack: ["PyTorch", "ResNet-18", "Conformer", "Wav2Lip", "Transformers", "Computer Vision"]
 ---
+
+The deepfake detection project started with a question that felt personal: what happens when a technology designed for something creative — in this case, video synthesis — is repurposed to mislead? The problem resonated because it sits at exactly the intersection I care most about: the gap between what a model can do and what it should be trusted to do in deployment.
+
+The technical challenge was audio-visual synchronization. Deepfake videos frequently exhibit a mismatch between lip movement and the corresponding audio, with literature suggesting error rates above 20% in manipulated content. Our pipeline addressed this with a three-stage architecture: a Conformer for audio transcription, 2D ResNet-18 for video feature extraction, and a transformer decoder to compute word error rate between the audio transcript and the lip movement reconstruction via Wav2Lip. We set our detection threshold at 40% WER to account for legitimate model variability — conservative enough to avoid false positives while remaining sensitive to manipulated content.
+
+The research was accepted to the IEEE International Conference on Advances in Data Engineering and Intelligent Systems (CADEIS 2024), selected as one of 130 papers from 750 submissions. We received the Best Paper Award (Runner-Up) at the conference — an outcome that mattered less for the credential than for the confirmation that the problem framing held up under peer scrutiny. The work reinforced something I have believed since: safety is not a property you add to a model after it works. It has to be the design constraint from the start.

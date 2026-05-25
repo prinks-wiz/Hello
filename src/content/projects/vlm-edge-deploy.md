@@ -1,21 +1,28 @@
 ---
-title: "VLM Edge Deployment Toolkit"
-summary: "Open-source toolkit for deploying vision-language models on edge hardware, from PyTorch through ONNX to a C++ inference runtime."
-date: 2026-05-19
-techStack: ["PyTorch", "ONNX", "TensorRT", "C++", "ONNX Runtime"]
+title: "Data Influence for Vision-Language Models"
+slug: "vlm-data-influence"
+summary: "LoRA fine-tuning on LLaVA-1.5-7B to diagnose label-source mismatch in autonomous driving. 3.5x accuracy gain over vision-only baselines across 16K+ driving samples."
+date: 2026-02-01
+techStack: ["PyTorch", "LoRA", "LLaVA-1.5-7B", "Qwen2.5-VL", "A100", "Autonomous Driving", "VQA"]
 featured: true
 ---
 
 ## Overview
 
-*Real content is TBD — this is a placeholder.*
+Training a vision-language model to predict driving actions sounds straightforward until you look at how the labels are generated. In most autonomous driving datasets, action labels come from GPS waypoints — the coordinates of where the vehicle went. The model, however, sees images. This creates a quiet mismatch: the training signal is derived from a source that is entirely invisible to the model during inference. Understanding whether this label-source conflict was degrading performance — and by how much — became the central question of this project.
 
-Vision-language models have grown powerful enough to be genuinely useful for real-world perception tasks, but deploying them outside a data center remains painful. Standard export pipelines assume GPU servers; edge targets — Jetson Orin, automotive SoCs, even Cortex-M class devices — have strict memory budgets, no Python runtime, and thermal constraints that kill naive inference loops within seconds.
+## The Problem
 
-This toolkit is an attempt to close that gap. The goal is a reproducible, opinionated pipeline: take a HuggingFace-compatible VLM, export it through ONNX with operator coverage validated against the target runtime, apply INT8 or FP16 quantization where the accuracy budget permits, and drop into a minimal C++ harness with no external dependencies beyond ONNX Runtime or TensorRT.
+The mismatch is subtle because it does not cause obvious failure. A model trained on GPS-derived waypoint labels will learn to predict plausible trajectories, and its validation accuracy on held-out samples from the same distribution will look reasonable. The problem surfaces when the visual scene contains information that the waypoint label does not capture: a pedestrian crossing, a vehicle merging, a lane change visible in the image but not reflected in the GPS path.
 
-## Approach
+I diagnosed this by building a VQA pipeline that augmented the training labels with navigation context derived directly from the visual input. Integrating LLaVA-1.5-7B and Qwen2.5-VL as the reasoning backbone, the pipeline answered structured questions about the scene — what is the road geometry? what are the relevant obstacles? — and incorporated those answers into the action prediction task.
 
-*Placeholder — describe architecture decisions, quantization strategy, and benchmarking methodology here.*
+## Training and Optimization
 
-The project targets three deployment tiers: TensorRT on Jetson Orin (highest throughput), ONNX Runtime with DirectML on Windows edge devices, and a bare ONNX Runtime CPU path as a fallback. Each tier has a validated operator allowlist and a benchmark suite that runs end-to-end inference on a fixed evaluation set to catch accuracy regressions before they reach hardware.
+LoRA reduced the trainable parameter count to under 2% of the 7B parameter base, making the fine-tuning tractable on a single 40GB A100. Seven targeted optimizations were applied to make that single GPU sufficient: gradient checkpointing, TF32 mixed precision, 8-bit AdamW, and careful batch sizing to maintain gradient quality. Training time dropped from multi-day estimates to hours.
+
+## Results
+
+Across 16,000+ driving samples, the VQA-augmented pipeline achieved 3.5x accuracy over vision-only baselines — not because the model architecture changed, but because the labels became honest. The navigation context provided ground truth that the GPS waypoints could not. This is, in some ways, a data engineering result more than a modelling result. The model was never the problem; the training signal was.
+
+The project is ongoing. Current work focuses on quantifying which scene categories benefit most from the VQA augmentation, and whether the pipeline can be adapted for other sensor modalities where label-source mismatch is endemic.
