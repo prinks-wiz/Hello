@@ -7,20 +7,26 @@
    re-declaring the values under .dark — no Tailwind dark: variants needed.
    ─────────────────────────────────────────────────────────────────────────── */
 :root {
-  --bg:         #FAF9F6;
-  --text:       #1a1a1a;
-  --text-muted: #6b7280;
-  --border:     #e5e7eb;
-  --accent:     #1E40AF;
+  --bg:              #FAF9F6;
+  --text:            #0f172a;   /* slate-900: ~18:1 on off-white */
+  --text-muted:      #475569;   /* slate-600: ~5.9:1 on off-white — minimum floor */
+  --border:          #e5e7eb;
+  --accent:          #1E40AF;   /* blue-800: ~7.5:1 on off-white */
+  --accent-hover:    #1e3a8a;   /* blue-900 for hover */
+  --nav-link:        #334155;   /* slate-700: readable default nav links in light */
+  --nav-link-hover:  #0f172a;   /* slate-900: hover */
 }
 
 .dark {
-  --bg:         #0E0E10;
-  --text:       #e8e6e1;
-  --text-muted: #9ca3af;
-  --border:     #27272a;
-  /* Slightly lighter than the brand blue so it reads on near-black */
-  --accent:     #3b82f6;
+  --bg:              #0E0E10;
+  --text:            #e8e6e1;   /* near-white: ~16:1 on near-black */
+  --text-muted:      #a0aec0;   /* ~6:1 on #0E0E10 — minimum floor for muted tier */
+  --border:          #27272a;
+  /* #60a5fa (blue-400): ~5.5:1 on #0E0E10 — replaces dark #3b82f6 which failed */
+  --accent:          #60a5fa;
+  --accent-hover:    #93c5fd;   /* blue-300: hover brightens further */
+  --nav-link:        #cbd5e1;   /* slate-300: ~7:1 on near-black */
+  --nav-link-hover:  #f8fafc;   /* slate-50: active/hover state */
 }
 
 /* ─── Base reset ─────────────────────────────────────────────────────────── */
@@ -76,6 +82,17 @@
   }
 }
 
+/* ─── JetBrains Mono legibility — FIX 4 ────────────────────────────────────
+   Mono fonts render thinner than proportional. Weight 500 compensates for
+   small labels. Reset to 400 inside prose code blocks where normal weight
+   is correct.
+   ─────────────────────────────────────────────────────────────────────────── */
+@layer base {
+  .font-mono {
+    font-weight: 500;
+  }
+}
+
 /* ─── Prose — markdown content typography ───────────────────────────────────
    Applied via class="prose-content" on the wrapping <article>.
    ─────────────────────────────────────────────────────────────────────────── */
@@ -121,9 +138,10 @@
     text-decoration-thickness: 2px;
   }
 
-  /* Inline code */
+  /* Inline code — reset mono weight to 400 inside prose */
   .prose-content :not(pre) > code {
     font-family: 'JetBrains Mono', Consolas, monospace;
+    font-weight: 400;
     font-size: 0.875em;
     background-color: var(--border);
     padding: 0.1em 0.35em;
@@ -142,6 +160,7 @@
     background: transparent;
     padding: 0;
     font-family: 'JetBrains Mono', Consolas, monospace;
+    font-weight: 400;   /* reset — normal weight for code blocks */
     font-size: 0.875rem;
     line-height: 1.6;
   }
