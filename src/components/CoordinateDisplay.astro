@@ -1,9 +1,36 @@
 ---
-// Pittsburgh, PA — update to reflect your actual location
+// Default: Pittsburgh, PA. Overwritten client-side via Geolocation API.
 ---
+<!--
+  CoordinateDisplay: shows the visitor's actual GPS coordinates.
+  Falls back to Pittsburgh (40.4406, -79.9959) if permission denied or unavailable.
+  Two-line layout aligns LAT / LON labels and values in a fixed grid.
+-->
 <span
-  class="font-mono text-xs text-subtle tracking-[0.08em]"
-  aria-label="Location coordinates: Pittsburgh, Pennsylvania"
+  id="coord-display"
+  class="font-mono text-xs text-subtle"
+  style="font-variant-numeric: tabular-nums; letter-spacing: 0.06em; line-height: 1.5;"
+  aria-live="polite"
+  aria-label="Visitor location coordinates"
 >
-  LAT 40.4406 LON -79.9959
+  <span class="flex flex-col">
+    <span><span class="inline-block w-8">LAT</span> <span id="coord-lat">40.4406</span></span>
+    <span><span class="inline-block w-8">LON</span> <span id="coord-lon">-79.9959</span></span>
+  </span>
 </span>
+
+<script>
+  const latEl = document.getElementById('coord-lat');
+  const lonEl = document.getElementById('coord-lon');
+
+  if (latEl && lonEl && 'geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        latEl.textContent = pos.coords.latitude.toFixed(4);
+        lonEl.textContent = pos.coords.longitude.toFixed(4);
+      },
+      () => { /* permission denied — keep Pittsburgh default */ },
+      { timeout: 5000, maximumAge: 300_000 }
+    );
+  }
+</script>

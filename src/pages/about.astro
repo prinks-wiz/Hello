@@ -11,9 +11,26 @@ import { url } from '../utils/url';
 
     <SectionHeader number="04" title="ABOUT" />
 
-    <h1 class="text-2xl font-semibold text-content mb-12 tracking-tight">
-      About
-    </h1>
+    <!-- ── Identity block: photo + name ────────────────────────────────── -->
+    <div class="flex items-start gap-6 mb-12">
+      <img
+        src={url('/Website_Profile.jpeg')}
+        alt="Priyanka Vijaybaskar"
+        width="96"
+        height="96"
+        class="rounded-sm object-cover shrink-0"
+        style="width: 96px; height: 96px;"
+        loading="eager"
+      />
+      <div>
+        <h1 class="text-2xl font-semibold text-content tracking-tight mb-1">
+          Priyanka Vijaybaskar
+        </h1>
+        <p class="font-mono text-xs text-subtle uppercase tracking-[0.12em]">
+          MCDS @ Carnegie Mellon · Edge ML · Spacecraft Lab
+        </p>
+      </div>
+    </div>
 
     <!-- ── Background ──────────────────────────────────────────────────── -->
     <section aria-labelledby="background-heading" class="mb-12">
