@@ -1,6 +1,6 @@
 ---
 org: "Siam Computing"
-role: "Product Strategy Intern"
+role: "Product and Systems Intern"
 startDate: 2024-06-01
 endDate: 2024-08-31
 location: "Remote"

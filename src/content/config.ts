@@ -16,8 +16,11 @@ const projects = defineCollection({
         blog:   z.string().optional(),
       })
       .optional(),
-    thumbnail: z.string().optional(),
-    featured:  z.boolean().default(false),
+    thumbnail:       z.string().optional(),
+    featured:        z.boolean().default(false),
+    stat:            z.string().optional(), // one-line impact metric for card display
+    domainTag:       z.string().optional(), // e.g. "VISION / NLP"
+    cardDescription: z.string().optional(), // longer recruiter-facing copy; overrides summary on card
   }),
 });
 

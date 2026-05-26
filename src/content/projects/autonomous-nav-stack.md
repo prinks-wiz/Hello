@@ -5,6 +5,9 @@ summary: "Novel Neural ODE-VAE hybrid architecture for physically consistent tra
 date: 2025-09-01
 techStack: ["PyTorch", "Neural ODEs", "VAE", "GANs", "Diffusion Models", "Trajectory Prediction"]
 featured: false
+stat: "75% improvement over baseline · PhysicsGen dataset · Neural ODE-VAE"
+domainTag: "ROBOTICS"
+cardDescription: "Trajectory prediction that obeys physics. I benchmarked GANs, diffusion models, and Pix2pix on the PhysicsGen dataset before designing a Neural ODE-VAE hybrid that enforces physical consistency in latent space rather than treating it as a post-processing constraint. 75% improvement over baseline. The key insight: physics belongs in the architecture, not the loss function."
 ---
 
 ## Overview

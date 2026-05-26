@@ -22,13 +22,13 @@ const recent: RecentItem[] = [
   ...allProjects.map(p => ({
     date:  p.data.date,
     title: p.data.title,
-    href:  `/projects/${p.slug}`,
+    href:  url(`/projects/${p.slug}`),
     kind:  'project' as const,
   })),
   ...allWriting.map(w => ({
     date:  w.data.date,
     title: w.data.title,
-    href:  `/writing/${w.slug}`,
+    href:  url(`/writing/${w.slug}`),
     kind:  'post' as const,
   })),
 ]
@@ -38,7 +38,7 @@ const recent: RecentItem[] = [
 const fmtDate = (d: Date) =>
   d.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
 ---
-<BaseLayout title="Priyanka Vijaybaskar — Edge ML / Robotics">
+<BaseLayout title="Priyanka Vijaybaskar — Perception Engineer">
 
   <div class="max-w-[720px] mx-auto px-6 py-20">
 
@@ -92,8 +92,8 @@ const fmtDate = (d: Date) =>
       <!-- ── Bio — three rhythmically distinct lines ─────────────────── -->
       <div class="max-w-[600px] flex flex-col">
         <!-- Line 1: punchy statement -->
-        <p class="text-2xl font-medium text-content tracking-tight">
-          I shrink vision models until they fit on satellites.
+        <p class="text-2xl font-medium italic text-subtle tracking-tight">
+          I train vision models in the cloud and make them run on hardware in orbit.
         </p>
 
         <!-- Line 2: clinical metadata strip -->
@@ -111,10 +111,30 @@ const fmtDate = (d: Date) =>
 
       <!-- Quick nav links -->
       <div class="flex flex-wrap gap-x-6 gap-y-2 mt-10">
-        <a href={url('/work')}     class="font-mono text-xs text-accent hover:underline">Work →</a>
-        <a href={url('/projects')} class="font-mono text-xs text-accent hover:underline">Projects →</a>
+        <a href={url('/work')} class="font-mono text-xs text-accent hover:underline flex items-center gap-1.5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          Work →
+        </a>
+        <a href={url('/projects')} class="font-mono text-xs text-accent hover:underline flex items-center gap-1.5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          Projects →
+        </a>
         <a href={url('/writing')}  class="font-mono text-xs text-accent hover:underline">Writing →</a>
         <a href={url('/about')}    class="font-mono text-xs text-accent hover:underline">About →</a>
+      </div>
+      <!-- Résumé download ghost button -->
+      <div class="mt-4">
+        <a
+          href={url('/resume.pdf')}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block font-mono text-xs px-4 py-2 border transition-colors hover:text-white"
+          style="color: var(--accent); border-color: var(--accent);"
+          onmouseover="this.style.backgroundColor='var(--accent)'"
+          onmouseout="this.style.backgroundColor='transparent'"
+        >
+          ↓ Download Résumé
+        </a>
       </div>
     </section>
 
@@ -130,14 +150,8 @@ const fmtDate = (d: Date) =>
         <li class="flex gap-3 text-sm">
           <span class="font-mono text-subtle shrink-0 mt-0.5">—</span>
           <span class="text-subtle leading-relaxed">
-            Deploying quantized EfficientNet on Jetson Orin NX for on-orbit
-            land-cover classification under sub-10W power constraints.
-          </span>
-        </li>
-        <li class="flex gap-3 text-sm">
-          <span class="font-mono text-subtle shrink-0 mt-0.5">—</span>
-          <span class="text-subtle leading-relaxed">
-            Building an open-source toolkit for exporting and running
+            Building and deploying quantized vision models end-to-end: EfficientNet on Jetson
+            Orin NX for a NASA-class CubeSat mission, and an open-source toolkit for running
             vision-language models on edge hardware via ONNX and TensorRT.
           </span>
         </li>
