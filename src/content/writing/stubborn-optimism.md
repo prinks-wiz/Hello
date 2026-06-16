@@ -1,7 +1,7 @@
 ---
 title: "Stubborn Optimism"
 date: 2026-06-16
-summary: "On the brand of hope showing up in recent films — and why victory isn't triumph, it's constantly trying."
+summary: "Thoughts on the themes of hope in recent films"
 category: personal
 ---
 
