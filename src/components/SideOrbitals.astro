@@ -387,6 +387,7 @@
 
   // ── Single shared animation loop ──────────────────────────────────────────
   let startTime: number | null = null;
+  let rafId: number | null = null;
 
   function loop(ts: number) {
     if (startTime === null) startTime = ts;
@@ -396,9 +397,21 @@
     drawBS(t);
     drawBH(t);
 
-    if (!reduceMotion) requestAnimationFrame(loop);
+    if (!reduceMotion) rafId = requestAnimationFrame(loop);
   }
 
-  requestAnimationFrame(loop);
+  function start() {
+    if (rafId === null) rafId = requestAnimationFrame(loop);
+  }
+
+  function stop() {
+    if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    document.hidden ? stop() : start();
+  });
+
+  start();
 })();
 </script>

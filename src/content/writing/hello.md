@@ -3,6 +3,7 @@ title: "When Your Labels Come From the Wrong Sensor"
 date: 2026-03-10
 summary: "On diagnosing label-source mismatch in autonomous driving datasets — and why the model is usually not the problem when accuracy is inexplicably poor."
 tags: ["machine learning", "autonomous driving", "data quality", "VLMs"]
+category: tech
 ---
 
 There is a category of ML debugging that does not look like debugging at all, because the model trains fine, validation accuracy is reasonable, and nothing is obviously broken. The problem only surfaces when you ask a pointed question: is the training label actually measuring what you think it is?

@@ -3,6 +3,7 @@ title: "When You Have No Data, You Go Back to Calculus"
 date: 2024-04-05
 summary: "How a mutual fund volatility model got built from first principles — using Continuous Wavelet Transform and second-order derivatives — when there was no training data to speak of."
 tags: ["data-science", "time-series", "mathematics", "fintech"]
+category: tech
 ---
 
 The standard assumption in applied machine learning is that data exists. You might not have enough of it, it might be noisy, it might be labelled wrong — but there is something to work with. The interesting engineering problems arise when that assumption fails.

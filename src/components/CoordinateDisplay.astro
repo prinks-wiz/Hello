@@ -24,13 +24,23 @@
   const lonEl = document.getElementById('coord-lon');
 
   if (latEl && lonEl && 'geolocation' in navigator) {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        latEl.textContent = pos.coords.latitude.toFixed(4);
-        lonEl.textContent = pos.coords.longitude.toFixed(4);
-      },
-      () => { /* permission denied — keep Pittsburgh default */ },
-      { timeout: 5000, maximumAge: 300_000 }
-    );
+    const cached = sessionStorage.getItem('coords');
+    if (cached) {
+      const { lat, lon } = JSON.parse(cached);
+      latEl.textContent = lat;
+      lonEl.textContent = lon;
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const lat = pos.coords.latitude.toFixed(4);
+          const lon = pos.coords.longitude.toFixed(4);
+          latEl.textContent = lat;
+          lonEl.textContent = lon;
+          try { sessionStorage.setItem('coords', JSON.stringify({ lat, lon })); } catch (_) {}
+        },
+        () => { /* permission denied — keep Pittsburgh default */ },
+        { timeout: 5000, maximumAge: 300_000 }
+      );
+    }
   }
 </script>

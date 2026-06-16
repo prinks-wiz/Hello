@@ -112,6 +112,7 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let startTime: number | null = null;
+  let rafId: number | null = null;
 
   function render(ts: number) {
     if (startTime === null) startTime = ts;
@@ -152,7 +153,15 @@
       ctx.fill();
     }
 
-    if (!reduceMotion) requestAnimationFrame(render);
+    if (!reduceMotion) rafId = requestAnimationFrame(render);
+  }
+
+  function start() {
+    if (rafId === null) rafId = requestAnimationFrame(render);
+  }
+
+  function stop() {
+    if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
   }
 
   // Minimal hex→rgb for trail alpha blending
@@ -163,5 +172,9 @@
     return `rgb(${r}, ${g}, ${b})`;
   }
 
-  requestAnimationFrame(render);
+  document.addEventListener('visibilitychange', () => {
+    document.hidden ? stop() : start();
+  });
+
+  start();
 </script>

@@ -3,6 +3,7 @@ title: "On Making Models Work When You Cannot Patch Them"
 date: 2025-11-15
 summary: "What satellite inference and production ML have in common — and why the discipline of edge deployment is really a discipline of thinking clearly about failure modes before they happen."
 tags: ["edge-ml", "deployment", "spacecraft", "reliability"]
+category: tech
 ---
 
 The standard mental model for deploying a machine learning model looks something like this: you train, evaluate, ship, monitor, and when something goes wrong, you patch. The cycle repeats. The infrastructure exists to support that loop — MLflow for experiment tracking, weights in object storage, a retraining pipeline on standby, alerting on distribution shift, rollback in the CD system.
