@@ -18,7 +18,7 @@ import { url } from '../utils/url';
     <!-- ── Identity block: photo + name ────────────────────────────────── -->
     <div class="flex items-start gap-6 mb-12">
       <img
-        src={url('/Website_Profile.jpeg')}
+        src="/Website_Profile.jpeg"
         alt="Priyanka Vijaybaskar"
         width="96"
         height="96"
@@ -47,14 +47,12 @@ import { url } from '../utils/url';
       <div class="space-y-4 text-subtle leading-relaxed text-sm">
         <p>
           I am an MCDS student at Carnegie Mellon working at the intersection of machine
-          learning and physical systems. My current work is at the CMU Spacecraft Lab, where
-          I am building the computer vision pipeline for a NASA-class CubeSat mission:
-          EfficientNet fine-tuned on Sentinel-2 multispectral imagery, quantized to INT8,
-          validated on a Jetson Orin NX under 5W. I also hold a credit on the Argus 2 mission
-          manifest and am co-authoring the mission definition for Argus 3. Alongside the lab,
-          I am building an open-source toolkit for deploying vision-language models on edge
-          hardware via ONNX and TensorRT, because the .pt to ONNX to TRT pipeline has a
-          talent for breaking in interesting ways and nobody has fixed it properly yet.
+          learning and physical systems. My current research is at the CMU Spacecraft Lab,
+          where I am building the computer vision pipeline for the Argus mission — helping a
+          satellite figure out where it is from what its camera sees. I am also building an
+          open-source toolkit for deploying vision-language models on edge hardware via ONNX
+          and TensorRT, because the export pipeline has a talent for breaking in interesting
+          ways and nobody has fixed it properly yet.
         </p>
         <p>
           What draws me to this space is the constraint. A cloud model can be re-evaluated,
@@ -64,6 +62,9 @@ import { url } from '../utils/url';
           to spend my career. I am particularly interested in perception roles at companies
           where the physical environment is the test: robotics, aerospace, edge AI. I am
           graduating in December 2026 and am open to full-time roles starting early 2027.
+        </p>
+        <p>
+          I also read poetry.
         </p>
       </div>
     </section>
@@ -132,7 +133,7 @@ import { url } from '../utils/url';
         </li>
         <li>
           <a
-            href="https://linkedin.com/in/priyanka-179947216"
+            href="https://www.linkedin.com/in/priyankavijaybaskar"
             class="flex items-center gap-2 font-mono text-sm text-accent hover:underline"
             target="_blank"
             rel="noopener noreferrer"
@@ -142,7 +143,7 @@ import { url } from '../utils/url';
               <rect width="4" height="12" x="2" y="9"/>
               <circle cx="4" cy="4" r="2"/>
             </svg>
-            linkedin.com/in/priyanka-179947216
+            linkedin.com/in/priyankavijaybaskar
           </a>
         </li>
       </ul>

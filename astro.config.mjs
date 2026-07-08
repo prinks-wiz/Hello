@@ -5,7 +5,6 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://prinks-wiz.github.io',
-  base: '/Hello',
   integrations: [
     // applyBaseStyles: false so global.css owns the @tailwind directives
     tailwind({ applyBaseStyles: false }),
