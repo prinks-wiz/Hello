@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import SectionHeader from '../../components/SectionHeader.astro';
+import SectionHero from '../../components/SectionHero.astro';
 import { getCollection } from 'astro:content';
 import { url } from '../../utils/url';
 
@@ -21,15 +21,11 @@ const fmt = (d: Date) =>
 >
   <div class="max-w-[720px] mx-auto px-6 py-16">
 
-    <SectionHeader number="03" title="WRITING" />
-
-    <div class="mb-14">
-      <h1 class="text-2xl font-semibold text-content mb-3 tracking-tight">Writing</h1>
-      <p class="text-subtle text-sm leading-relaxed max-w-[480px]">
-        Technical essays when I have something precise to say.<br />
-        A personal corner for everything else.
-      </p>
-    </div>
+    <SectionHero
+      section="writing"
+      title="Writing"
+      description="Technical essays on ML, systems, and robotics. And a personal corner for thoughts that didn't fit anywhere else."
+    />
 
     <!-- ── Technical writing ─────────────────────────────────────────── -->
     <section aria-labelledby="tech-heading" class="mb-20">

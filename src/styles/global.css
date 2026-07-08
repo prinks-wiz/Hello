@@ -15,6 +15,12 @@
   --accent-hover:    #1e3a8a;   /* blue-900 for hover */
   --nav-link:        #334155;   /* slate-700: readable default nav links in light */
   --nav-link-hover:  #0f172a;   /* slate-900: hover */
+
+  /* Section accent colors for celestial theming */
+  --work-accent:     #d4522f;   /* forge/iron: warm red */
+  --projects-accent: #3b82f6;   /* workshop: tech blue */
+  --writing-accent:  #a78bfa;   /* library: thought purple */
+  --about-accent:    #fbbf24;   /* heart: warm gold */
 }
 
 .dark {
@@ -27,6 +33,12 @@
   --accent-hover:    #93c5fd;   /* blue-300: hover brightens further */
   --nav-link:        #cbd5e1;   /* slate-300: ~7:1 on near-black */
   --nav-link-hover:  #f8fafc;   /* slate-50: active/hover state */
+
+  /* Section accents adapt to dark mode */
+  --work-accent:     #f87171;   /* red-400: warmer, brighter for dark */
+  --projects-accent: #60a5fa;   /* blue-400: matches accent */
+  --writing-accent:  #c084fc;   /* purple-400: brighter for dark */
+  --about-accent:    #fcd34d;   /* amber-300: warmer gold for dark */
 }
 
 /* ─── Base reset ─────────────────────────────────────────────────────────── */

@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionHeader from '../components/SectionHeader.astro';
+import SectionHero from '../components/SectionHero.astro';
 import WorkEntry from '../components/WorkEntry.astro';
 import { getCollection } from 'astro:content';
 
@@ -17,11 +17,11 @@ const sorted = entries.sort(
 >
   <div class="max-w-[720px] mx-auto px-6 py-16">
 
-    <SectionHeader number="01" title="WORK" />
-
-    <h1 class="text-2xl font-semibold text-content mb-12 tracking-tight">
-      Experience
-    </h1>
+    <SectionHero
+      section="work"
+      title="Experience"
+      description="Where I've worked and what I've built. From robotics labs to spacecraft perception: learning to deploy real systems under real constraints."
+    />
 
     {sorted.map(entry => (
       <WorkEntry

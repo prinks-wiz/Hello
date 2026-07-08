@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import InteractiveSolarSystem from '../components/InteractiveSolarSystem.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import OrbitDivider from '../components/OrbitDivider.astro';
 import MissionBlock from '../components/MissionBlock.astro';
@@ -109,19 +110,6 @@ const fmtDate = (d: Date) =>
         </p>
       </div>
 
-      <!-- Quick nav links -->
-      <div class="flex flex-wrap gap-x-6 gap-y-2 mt-10">
-        <a href={url('/work')} class="font-mono text-xs text-accent hover:underline flex items-center gap-1.5">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-          Work →
-        </a>
-        <a href={url('/projects')} class="font-mono text-xs text-accent hover:underline flex items-center gap-1.5">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-          Projects →
-        </a>
-        <a href={url('/writing')}  class="font-mono text-xs text-accent hover:underline">Writing →</a>
-        <a href={url('/about')}    class="font-mono text-xs text-accent hover:underline">About →</a>
-      </div>
       <!-- Résumé download ghost button -->
       <div class="mt-4">
         <a
@@ -136,6 +124,12 @@ const fmtDate = (d: Date) =>
           ↓ Download Résumé
         </a>
       </div>
+    </section>
+
+    <!-- ── Interactive Solar System Hero ────────────────────────────── -->
+    <section class="my-20" aria-labelledby="solar-heading">
+      <h2 id="solar-heading" class="sr-only">Navigation: Explore my work</h2>
+      <InteractiveSolarSystem />
     </section>
 
     <!-- Mission status block -->

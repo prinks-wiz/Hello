@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionHeader from '../components/SectionHeader.astro';
+import SectionHero from '../components/SectionHero.astro';
 import { url } from '../utils/url';
 ---
 <BaseLayout
@@ -9,7 +9,11 @@ import { url } from '../utils/url';
 >
   <div class="max-w-[720px] mx-auto px-6 py-16">
 
-    <SectionHeader number="04" title="ABOUT" />
+    <SectionHero
+      section="about"
+      title="About"
+      description="Building things that work under pressure. Spacecraft, robots, models at the edge — systems that fail in clear ways."
+    />
 
     <!-- ── Identity block: photo + name ────────────────────────────────── -->
     <div class="flex items-start gap-6 mb-12">
